@@ -2,25 +2,9 @@ import {
   ArrayMaxSize,
   IsArray,
   IsDateString,
-  IsEmail,
   IsNotEmpty,
-  IsNotEmptyObject,
-  IsObject,
   IsString,
-  ValidateNested,
 } from 'class-validator';
-
-import { Type } from 'class-transformer';
-
-abstract class User {
-  @IsString()
-  @IsNotEmpty()
-  name: string;
-
-  @IsEmail()
-  @IsNotEmpty()
-  email: string;
-}
 
 enum Priority {
   low,
@@ -44,9 +28,7 @@ export class CreateListDto {
   @IsNotEmpty()
   priority: Priority;
 
-  @IsObject()
-  @IsNotEmptyObject()
-  @ValidateNested()
-  @Type(() => User)
-  owner: User;
+  @IsString()
+  @IsNotEmpty()
+  owner: string;
 }

@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { HydratedDocument } from 'mongoose';
-import { User } from './user.entity';
+import { HydratedDocument } from 'mongoose';
 
 export type ListDocument = HydratedDocument<List>;
 
@@ -19,12 +18,11 @@ export class List {
   priority: string;
 
   @Prop({
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Users',
+    type: String,
     required: true,
     index: true,
   })
-  owner: User;
+  owner: string;
 }
 
 export const ListSchema = SchemaFactory.createForClass(List);
