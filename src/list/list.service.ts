@@ -3,7 +3,7 @@ import { CreateListDto } from './dto/create-list.dto';
 import { UpdateListDto } from './dto/update-list.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { List } from './entities/list.entity';
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 
 @Injectable()
 export class ListService {
@@ -22,8 +22,8 @@ export class ListService {
     return `This action returns a #${id} list`;
   }
 
-  update(id: number, updateListDto: UpdateListDto) {
-    return `This action updates a #${id} list`;
+  update(id: mongoose.Schema.Types.ObjectId, updateListDto: UpdateListDto) {
+    return this.listModel.findByIdAndUpdate(id, updateListDto, { new: true });
   }
 
   remove(id: number) {

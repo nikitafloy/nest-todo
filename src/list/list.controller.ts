@@ -11,6 +11,7 @@ import { ListService } from './list.service';
 import { CreateListDto } from './dto/create-list.dto';
 import { UpdateListDto } from './dto/update-list.dto';
 import { List } from './entities/list.entity';
+import mongoose from 'mongoose';
 
 @Controller('list')
 export class ListController {
@@ -27,8 +28,11 @@ export class ListController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateListDto: UpdateListDto) {
-    return this.listService.update(+id, updateListDto);
+  update(
+    @Param('id') id: mongoose.Schema.Types.ObjectId,
+    @Body() updateListDto: UpdateListDto,
+  ) {
+    return this.listService.update(id, updateListDto);
   }
 
   @Delete(':id')
