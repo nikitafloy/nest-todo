@@ -14,15 +14,20 @@ export class ListService {
     return createdList.save();
   }
 
-  findAll(payload) {
+  async findAll(payload: {
+    [Property in keyof List]: List[Property];
+  }): Promise<List[]> {
     return this.listModel.find(payload);
   }
 
-  update(id: mongoose.Schema.Types.ObjectId, updateListDto: UpdateListDto) {
+  async update(
+    id: mongoose.Schema.Types.ObjectId,
+    updateListDto: UpdateListDto,
+  ): Promise<List> {
     return this.listModel.findByIdAndUpdate(id, updateListDto, { new: true });
   }
 
-  remove(id: mongoose.Schema.Types.ObjectId) {
+  async remove(id: mongoose.Schema.Types.ObjectId): Promise<List> {
     return this.listModel.findByIdAndDelete(id);
   }
 }
