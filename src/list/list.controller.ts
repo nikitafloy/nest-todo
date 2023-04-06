@@ -36,7 +36,7 @@ export class ListController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.listService.remove(+id);
+  remove(@Param('id') id: mongoose.Schema.Types.ObjectId) {
+    return this.listService.remove(id);
   }
 }

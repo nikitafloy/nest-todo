@@ -26,7 +26,7 @@ export class ListService {
     return this.listModel.findByIdAndUpdate(id, updateListDto, { new: true });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} list`;
+  remove(id: mongoose.Schema.Types.ObjectId) {
+    return this.listModel.findByIdAndDelete(id);
   }
 }
