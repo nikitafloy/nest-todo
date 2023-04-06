@@ -18,10 +18,6 @@ export class ListService {
     return this.listModel.find(payload);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} list`;
-  }
-
   update(id: mongoose.Schema.Types.ObjectId, updateListDto: UpdateListDto) {
     return this.listModel.findByIdAndUpdate(id, updateListDto, { new: true });
   }
