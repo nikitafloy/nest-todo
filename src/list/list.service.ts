@@ -1,15 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { CreateListDto } from './dto/create-list.dto';
 import { UpdateListDto } from './dto/update-list.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { List } from './entities/list.entity';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class ListService {
-  create(createListDto: CreateListDto) {
-    return createListDto;
+  constructor(@InjectModel(List.name) private listModel: Model<List>) {}
+
+  async create(createListDto: CreateListDto): Promise<List> {
+    const createdList = await this.listModel.create(createListDto);
+    return createdList.save();
   }
 
-  findAll() {
-    return `This action returns all list`;
+  findAll(payload) {
+    return this.listModel.find(payload);
   }
 
   findOne(id: number) {
